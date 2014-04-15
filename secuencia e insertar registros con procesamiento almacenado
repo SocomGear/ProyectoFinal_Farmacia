@@ -1,0 +1,157 @@
+CREATE SEQUENCE secuenciamedicamento
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuencialaboratorio
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuenciausoterapeutico
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuenciaconcentracion
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuenciapresentacion
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuencianombrecomercial
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE SEQUENCE secuencia_usuario 
+start with 1
+increment by 1
+nomaxvalue;
+
+CREATE OR REPLACE PROCEDURE guardar_medicamento(my_idme out integer,my_compo_quim in varchar2,my_fecha in date,my_precio in float) as begin
+SELECT secuenciamedicamento.nextval into my_idme from dual;
+INSERT into Medicamento(ID_medicamento,composicion_quimica,fecha_vencimiento,precio) values(my_idme,my_compo_quim,my_fecha,my_precio);
+end;
+/
+
+CREATE OR REPLACE TRIGGER disparadorprecio BEFORE INSERT on Medicamento for each row
+begin
+if:new.precio<=0 then
+RAISE_APPLICATION_ERROR(-20001,'lo siento el precio no puede ser menor o igual a cero');
+end if;
+end;
+/
+
+
+CREATE OR REPLACE PROCEDURE guardar_laboratorio(my_idla out integer,my_idmed in integer,my_nombre in varchar2) as begin
+SELECT secuencialaboratorio.nextval into my_idla from dual;
+INSERT into Laboratorio(ID_laboratorio,ID_medicamento,Nombre) values(my_idla,my_idmed,my_nombre);
+end;
+/
+
+CREATE OR REPLACE PROCEDURE guardar_usoterapeutico(my_idte out integer,my_idmed in integer,my_nombre in varchar2) as begin
+SELECT secuenciausoterapeutico.nextval into my_idte from dual;
+INSERT into Uso_terapeutico(ID_terapeutico,ID_medicamento,Nombre) values(my_idte,my_idmed,my_nombre);
+end;
+/
+
+CREATE OR REPLACE PROCEDURE guardar_concentracion(my_idcon out integer,my_idmed in integer,my_nombre in varchar2) as begin
+SELECT secuenciaconcentracion.nextval into my_idcon from dual;
+INSERT into Concentracion(ID_concentracion,ID_medicamento,Nombre) values(my_idcono,my_idmed,my_nombre);
+end;
+/
+
+CREATE OR REPLACE PROCEDURE guardar_presentacion(my_idpre out integer,my_idmed in integer,my_nombre in varchar2) as begin
+SELECT secuenciapresentacion.nextval into my_idpre from dual;
+INSERT into Presentacion(ID_presentacion,ID_medicamento,Nombre) values(my_idpre,my_idmed,my_nombre);
+end;
+/
+
+CREATE OR REPLACE PROCEDURE guardar_nombrecomercial(my_idcom out integer,my_idmed in integer,my_nombre in varchar2) as begin
+SELECT secuencianombrecomercial.nextval into my_idcom from dual;
+INSERT into Nombre_comercial(ID_comercial,ID_medicamento,Nombre) values(my_idcom,my_idmed,my_nombre);
+end;
+/
+
+CREATE OR REPLACE PROCEDURE Insertar_usuario(my_id out integer,my_login in varchar2, my_password in varchar2) as
+BEGIN
+SELECT secuencia_usuario.nextval into my_id from dual;
+INSERT INTO Usuario(ID_usuario,login,password) values(my_id,my_login,my_password);
+end;
+/
+
+CREATE OR REPLACE TRIGGER  disparadorusuario BEFORE UPDATE OR  INSERT ON Insertar_usuario FOR EACH ROW
+begin
+for i in (SELECT * FROM Usuario)loop
+if :new.login=i.login then
+RAISE_APPLICATION_ERROR(-20001,'lo sentimos este login ya esxiste favor de insertar otro gracias');
+end if;
+end loop;
+end ;
+/
+
+------------------------------------------------------------------------------------------------------------
+
+                                                     Autenticar usuario
+
+CREATE OR REPLACE PROCEDURE autenticar_usuario(encontrado out integer,mi_login in varchar2,mi_password in varchar2) AS
+BEGIN
+FOR I IN (SELECT * FROM Usuario) LOOP
+IF mi_login=I.login and mi_password=I.password THEN
+encontrado:=1;
+ELSE
+encontrado:=0;
+END IF;
+END LOOP;
+END;
+/
+
+------------------------------------------------------------------------------------------------------
+
+                                                               Buscar por id
+CREATE OR REPLACE PROCEDURE buscar_medicamento(my_id in integer)
+as
+begin
+for i in(SELECT * FROM Medicamento Where ID_medicamento= ,y_id) loop
+dbms_output.put_line(i.ID_medicamento||i.composicion_quimica||i.fecha_vencimiento||i.precio);
+end loop;
+end;
+/
+
+--------------------------------------------------------------------------------------------------------
+                                   buscar todo
+
+CREATE OR REPLACE PROCEDURE buscar_todo() as
+begin
+for i in (SELECT from ID_medicamento) loop
+dbms_output.put_line(i.ID_medicamento||i.composicion_quimica||i.fecha_vencimiento||i.precio);
+end loop;
+end;
+/
+
+-----------------------------------------------------------------------------------------------------
+
+                             eliminar
+
+CREATE OR REPLACE PROCEDURE eliminar(my_login in integer) as
+begin
+DELETE FROM Usuario where login=my_login;
+end;
+/
+-----------------------------------------------------------------------------------------
+                         Actualizar
+
+CREATE OR REPLACE PROCEDURE actualizar(my_login in integer,my_com in varchar2,fech in date,pre in float)as
+begin
+UPDATE Medicamento SET composicion_quimica=my_com,fecha_vencimiento=fech,precio=pre WHERE ID_medicamento=my_login;
+end;
+/
+
+
+
+
