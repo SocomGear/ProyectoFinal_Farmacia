@@ -46,3 +46,9 @@ Nombre varchar2(80),
 CONSTRAINT ID_medicamento_fk_no FOREIGN KEY(ID_medicamento)
 REFERENCES Medicamento(ID_medicamento),
 CONSTRAINT ID_comercial_pk PRIMARY KEY(ID_comercial))
+
+CREATE TABLE Usuario(
+ID_usuario integer,
+login varchar2(80), 
+password varchar2(80),
+CONSTRAINT ID_usuario_pk PRIMARY KEY(ID_usuario));
