@@ -28,7 +28,7 @@ start with 1
 increment by 1
 nomaxvalue;
 
-CREATE SEQUENCE secuencia_usuario 
+CREATE SEQUENCE secuencia_usuarios 
 start with 1
 increment by 1
 nomaxvalue;
@@ -62,7 +62,7 @@ end;
 
 CREATE OR REPLACE PROCEDURE guardar_concentracion(my_idcon out integer,my_idmed in integer,my_nombre in varchar2) as begin
 SELECT secuenciaconcentracion.nextval into my_idcon from dual;
-INSERT into Concentracion(ID_concentracion,ID_medicamento,Nombre) values(my_idcono,my_idmed,my_nombre);
+INSERT into Concentracion(ID_concentracion,ID_medicamento,Nombre) values(my_idcon,my_idmed,my_nombre);
 end;
 /
 
@@ -80,14 +80,14 @@ end;
 
 CREATE OR REPLACE PROCEDURE Insertar_usuario(my_id out integer,my_login in varchar2, my_password in varchar2) as
 BEGIN
-SELECT secuencia_usuario.nextval into my_id from dual;
-INSERT INTO Usuario(ID_usuario,login,password) values(my_id,my_login,my_password);
+SELECT secuencia_usuarios.nextval into my_id from dual;
+INSERT INTO Usuarios(ID_usuario,login,password) values(my_id,my_login,my_password);
 end;
 /
 
-CREATE OR REPLACE TRIGGER  disparadorusuario BEFORE UPDATE OR  INSERT ON Insertar_usuario FOR EACH ROW
+CREATE OR REPLACE TRIGGER  disparadorusuario BEFORE UPDATE OR  INSERT ON Usuarios FOR EACH ROW
 begin
-for i in (SELECT * FROM Usuario)loop
+for i in (SELECT * FROM Usuarios)loop
 if :new.login=i.login then
 RAISE_APPLICATION_ERROR(-20001,'lo sentimos este login ya esxiste favor de insertar otro gracias');
 end if;
@@ -101,7 +101,7 @@ end ;
 
 CREATE OR REPLACE PROCEDURE autenticar_usuario(encontrado out integer,mi_login in varchar2,mi_password in varchar2) AS
 BEGIN
-FOR I IN (SELECT * FROM Usuario) LOOP
+FOR I IN (SELECT * FROM Usuarios) LOOP
 IF mi_login=I.login and mi_password=I.password THEN
 encontrado:=1;
 ELSE
@@ -117,7 +117,7 @@ END;
 CREATE OR REPLACE PROCEDURE buscar_medicamento(my_id in integer)
 as
 begin
-for i in(SELECT * FROM Medicamento Where ID_medicamento= ,y_id) loop
+for i in(SELECT * FROM Medicamento Where ID_medicamento= my_id) loop
 dbms_output.put_line(i.ID_medicamento||i.composicion_quimica||i.fecha_vencimiento||i.precio);
 end loop;
 end;
@@ -140,7 +140,7 @@ end;
 
 CREATE OR REPLACE PROCEDURE eliminar(my_login in integer) as
 begin
-DELETE FROM Usuario where login=my_login;
+DELETE FROM Usuarios where login=my_login;
 end;
 /
 -----------------------------------------------------------------------------------------
