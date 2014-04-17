@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 public class BuscarTodo {
     static Conexion con;

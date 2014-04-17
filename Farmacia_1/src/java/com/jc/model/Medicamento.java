@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 public class Medicamento {
     private  int ID_medicamento;

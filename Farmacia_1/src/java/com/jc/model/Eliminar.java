@@ -10,7 +10,7 @@ import java.sql.Connection;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 public class Eliminar {
     static Conexion  con;

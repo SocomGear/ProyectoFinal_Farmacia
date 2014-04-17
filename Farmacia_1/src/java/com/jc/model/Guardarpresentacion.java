@@ -8,7 +8,7 @@ package com.jc.model;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 import java.sql.*;
 public class Guardarpresentacion {

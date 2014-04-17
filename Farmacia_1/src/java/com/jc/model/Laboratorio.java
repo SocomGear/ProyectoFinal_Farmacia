@@ -8,7 +8,7 @@ package com.jc.model;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 public class Laboratorio {
     private int ID_laboratorio;

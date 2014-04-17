@@ -12,7 +12,7 @@ import java.sql.Connection;
 
 /**
  *
- * @author Deyanira
+ * @author Damian,Alejandro
  */
 public class Buscarmedicamento {
     static Conexion con;
