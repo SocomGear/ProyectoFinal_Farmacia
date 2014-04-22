@@ -1,0 +1,216 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Web App</title>
+<link href="jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="jquery.mobile-1.0.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(e) {
+    
+    $("#che").click(function(e) {
+        var res = "ola";
+        var es="damian";
+        if (res === $("#passusa").val() && es ===$("#nomusa").val()){
+            alert("Login correcto");
+            location.href = "#Administracion1";
+            res=null;
+            es=null;
+        }
+        else{
+            alert("Login incorrecto");
+        }
+    });
+    
+});
+
+$(document).ready(function(e) {
+    
+    $("#mta").click(function(e) {
+        var res = "adios";
+        var es="alejandroo";
+        if (res === $("#paslo").val() && es ===$("#loo").val()){
+            alert("Login correcto");
+            res=" ";
+            location.href = "#Usuarios1";
+            res=null;
+            es=null;
+        }
+        else{
+            alert("Login incorrecto");
+        }
+    });
+    
+});
+
+
+$()
+
+
+
+</script>
+
+</head> 
+<body>
+
+<div data-role="page" id="page">
+  <div data-role="header">
+    <h1>Inicio</h1>
+    <a href="#page" data-icon="home">home</a>
+    <a href="#menu" data-icon="grid">Menu</a>
+  </div>
+  <div data-role="content">Content</div>
+  <div data-role="footer" data-position="fixed">
+    <h4>Farmacia(Integrantes Demian y Alejandro)</h4>
+  </div>
+</div>
+
+<div data-role="page" id="menu">
+  <div data-role="header">
+    <h1>Menu</h1>
+    <a href="#page" data-icon="home">home</a>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+      <li><a href="#Administracion"><img src="Desert.jpg" width="120" height="90" alt="desierto"><h2>Administracon de Medicamentos</h2><p>Dar de alta, modificar y  borrar</p></a></li>
+      <li><a href="#Usuarios"><img src="Desert.jpg" width="120" height="90" alt="desierto"><h2>Usuarios</h2><p>Autenticar usuario e Ingresar usuarios</p></a></li>
+      <li><a href="#Busqueda"><img src="Desert.jpg" width="120" height="90" alt="desierto"><h2>Busqueda</h2><p>Busqueda de Medicamentos</p></a></li>
+    </ul> 
+  </div>
+</div> 
+
+<!--.......................................................................................................................................................-->
+<div data-role="page" id="Administracion">
+    <div data-role="header">
+        <a href="#menu" data-role="button" data-icon="home">Regresar</a>
+        <h1>Autenticar</h1>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">  
+            <label for="textinput">Login:</label>
+            <input type="text" name="textinput" id="nomusa" value="" />
+        </div>
+        <div data-role="fieldcontain">  
+            <label for="textinput">Password:</label>
+            <input type="password" name="textinput" id="passusa" 
+            value="" />
+        </div>
+        <a id="che" href="#" data-role="button" 
+        data-icon="forward">Ingresar</a>
+    </div>
+    </div>    
+</div>
+<div data-role="page" id="Usuarios">
+    <div data-role="header">
+        <a href="#menu" data-role="button" data-icon="home">Regresar</a>
+        <h1>Autenticar</h1>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">  
+            <label for="textinput">login:</label>
+            <input type="text" name="textinput" id="loo" value="" />
+        </div>
+        <div data-role="fieldcontain">  
+            <label for="textinput">Password:</label>
+            <input type="password" name="textinput" id="paslo" 
+            value="" />
+        </div>
+        <a id="mta" href="#" data-role="button" 
+        data-icon="forward">Ingresar</a>
+    </div>
+    </div>    
+</div>
+<div data-role="page" id="Busqueda">
+  <div data-role="header">
+    <h1>Busqueda</h1>
+    <a href="#menu" data-icon="home">Regresar</a>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+                        <li><a href="#Bus">Buscar Medicamento</a></li>
+                        <li><a href="#Buscartodo">Buscar Todo</a></li>
+    </ul> 
+  </div>
+</div>
+
+<!--.......................................................................................................................................................-->
+
+<div data-role="page" id="Administracion1">
+  <div data-role="header">
+    <h1>Administracion de MEdicamentos</h1>
+    <a href="#menu" data-icon="home">Regresar</a>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+                        <li><a href="#guardarmed">Guardar Medicamento</a></li>
+                        <li><a href="#guardarcon">Guardar Concentracion</a></li>
+                        <li><a href="#guardarlab">Guardar Laboratorio</a></li>
+                        <li><a href="#guardarnom">Guardar Nombre Comercial</a></li>
+                        <li><a href="#guardarpre">Guardar Presentacion</a></li>
+                        <li><a href="#guardaruso">Guardar Uso Terapeutico</a></li>
+                        <li><a href="#actualizar">Actualizar</a></li>
+                        <li><a href="#eliminar">Eliminar</a></li>                        
+    </ul> 
+  </div>
+</div>
+<div data-role="page" id="Usuarios1">
+  <div data-role="header">
+    <h1>Usuarios</h1>
+    <a href="#menu" data-icon="home">Regresar</a>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true">
+                        <li><a href="#Usuarios2">Insertar Usuarios</a></li>
+    </ul> 
+  </div>
+</div>
+
+<div data-role="page" id="Buscartodo">
+  <div data-role="header">
+    <a href="#Busqueda" data-role="button" data-icon="home">Regresar</a>
+    <h1>Ver Medicamentos</h1>
+  </div>
+  <div data-role="content">
+    <a href="#" data-role="button" data-icon="search">Buscar todo</a>
+    <div data-role="fieldcontain">
+        <div class="ui-grid-c" id="tabproductos">
+            <div class="ui-block-a" id="idshprod"><b>ID_medicamento</b></div>
+            <div class="ui-block-b" id="shprod"><b>composicion_quimica</b></div>
+            <div class="ui-block-c" id="shprecio"><b>fecha_vencimiento</b></div>
+            <div class="ui-block-d" id="shexist"><b>precio</b></div>
+            <div class="ui-block-a" id="bloque2-1">Bloque  2,1</div>
+            <div class="ui-block-b" id="bloque2-2">Bloque  2,2</div>
+            <div class="ui-block-c" id="bloque2-3">Bloque  2,3</div>
+            <div class="ui-block-d" id="bloque2-4">Bloque  2,4</div>
+            <div class="ui-block-a" id="bloque3-1">Bloque  3,1</div>
+            <div class="ui-block-b" id="bloque3-2">Bloque  3,2</div>
+            <div class="ui-block-c" id="bloque3-3">Bloque  3,3</div>
+            <div class="ui-block-d" id="bloque3-4">Bloque  3,4</div>
+            <div class="ui-block-a" id="bloque4-1">Bloque  4,1</div>
+            <div class="ui-block-b" id="bloque4-2">Bloque  4,2</div>
+            <div class="ui-block-c" id="bloque4-3">Bloque  4,3</div>
+            <div class="ui-block-d" id="bloque4-4">Bloque  4,4</div>
+            <div class="ui-block-a" id="bloque5-1">Bloque  5,1</div>
+            <div class="ui-block-b" id="bloque5-2">Bloque  5,2</div>
+            <div class="ui-block-c" id="bloque5-3">Bloque  5,3</div>
+            <div class="ui-block-d" id="bloque5-4">Bloque  5,4</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div data-role="page" id="Bus">
+    <div data-role="header">
+    <a href="#Busqueda" data-role="button" data-icon="home">Regresar</a>
+    <h1>Buqueda por ID</h1>
+  </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <label for="textbuscar">ID:</label>
+            <input type="text" name="textbuscar" id="idelprod" value=""/>
+            <a id="busdelprod" data-role="button" data-icon="search">
+            Buscar Producto</a>
+        </div>
+    </div>
+</div>
